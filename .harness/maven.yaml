@@ -26,7 +26,10 @@ pipeline:
                   identifier: Run_1
                   spec:
                     shell: Sh
-                    command: mvn clean packages
+                    command: |-
+                      mvn compile
+                      mvn test
+                      mvn package
           platform:
             os: Linux
             arch: Amd64
