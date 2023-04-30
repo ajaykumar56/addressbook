@@ -1,0 +1,35 @@
+pipeline:
+  name: maven
+  identifier: maven
+  projectIdentifier: aj
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: git
+        repoName: addressbook
+        build: <+input>
+  stages:
+    - stage:
+        name: mvn
+        identifier: mvn
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
+                  spec:
+                    shell: Sh
+                    command: mvn clean packages
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
