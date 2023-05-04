@@ -36,3 +36,41 @@ pipeline:
           runtime:
             type: Docker
             spec: {}
+    - stage:
+        name: docker
+        identifier: docker
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
+                  spec:
+                    connectorRef: docker
+                    repo: ajaykumar/aj
+                    tags:
+                      - latest
+              - step:
+                  type: Run
+                  name: Run_2
+                  identifier: Run_2
+                  spec:
+                    connectorRef: docker
+                    image: harness1:latest
+                    shell: Sh
+                    command: "docker\_build\_-t\_ajaykumar/aj/harness1:latest\_.\n\ndocker\_login\_-u\_ajaykumar24\_-p\_<+stage.variables.dockerpwd>\n\ndocker\_push\_ajaykumar/aj/harness1:latest"
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+        variables:
+          - name: dockerpwd
+            type: String
+            description: ""
+            value: ajay@1997
