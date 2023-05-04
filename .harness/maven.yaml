@@ -31,10 +31,10 @@ pipeline:
                       mvn test
                       mvn package
           platform:
-            os: Windows
+            os: Linux
             arch: Amd64
           runtime:
-            type: Docker
+            type: Cloud
             spec: {}
     - stage:
         name: docker
